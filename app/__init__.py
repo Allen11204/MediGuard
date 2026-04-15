@@ -10,7 +10,12 @@ def create_app():
     bcrypt.init_app(app)
 
     with app.app_context():
-        from app import models
+        # Import all models to register them with SQLAlchemy
+        from app.models.user import User
+        from app.models.patient import Patient
+        from app.models.doctor import Doctor
+        from app.models.medical_record import MedicalRecord
+        from app.models.audit_log import AuditLog
         db.create_all()
 
         from app.routes import register_blueprints

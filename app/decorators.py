@@ -44,7 +44,6 @@ def audit_log(action, resource_type):
                 action=action,
                 resource_type=resource_type,
                 outcome="success" if result[1] < 400 else "failure",
-                source_ip=request.remote_addr,
                 timestamp=datetime.utcnow()
             )
             db.session.add(log)
