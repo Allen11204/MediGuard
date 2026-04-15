@@ -14,7 +14,9 @@ def create_app():
         from app.models.user import User
         from app.models.patient import Patient
         from app.models.doctor import Doctor
-        from app.models.medical_record import MedicalRecord
+        from app.models.condition import Condition
+        from app.models.medication import Medication
+        from app.models.observation import Observation
         from app.models.audit_log import AuditLog
         db.create_all()
 
