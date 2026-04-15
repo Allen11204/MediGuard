@@ -32,11 +32,13 @@ def seed_fhir_data():
         print("Creating admin and doctor users...")
         admin = User(
             username="admin", 
+            email="admin@example.com",
             password_hash=bcrypt.generate_password_hash("admin123").decode('utf-8'),
             role="Admin"
         )
         doctor = User(
             username="doctor", 
+            email="doctor@example.com",
             password_hash=bcrypt.generate_password_hash("doctor123").decode('utf-8'),
             role="Doctor"
         )
@@ -129,6 +131,7 @@ def seed_fhir_data():
             
             patient_user = User(
                 username=username,
+                email=f"{username}@test.com",
                 password_hash=patient_pwd_hash, # Use optimized hash
                 role="Patient"
             )
