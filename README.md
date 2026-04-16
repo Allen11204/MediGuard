@@ -59,3 +59,8 @@ Privacy-aware medical information system with LLM chatbot — RBAC, NER, DP, Aud
 
 
 https://synthetichealth.github.io/synthea/ # data source
+
+1.登录api+界面
+2.医生的界面（管理的病人的数据+chatbot）+api
+3.病人的界面（自己的数据加chatbot）+api
+4.admin的界面（audit logs和管理用户）+api

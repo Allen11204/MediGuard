@@ -3,7 +3,7 @@ Condition model - Simplified for DP (Differential Privacy) testing
 Uses plain language fields that non-medical people can understand
 """
 
-from app.extensions import db
+from backend.extensions import db
 
 class Condition(db.Model):
     """

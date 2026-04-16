@@ -4,7 +4,7 @@ Only contains login credentials and role, no business data
 """
 
 from datetime import datetime
-from app.extensions import db
+from backend.extensions import db
 
 class User(db.Model):
     """

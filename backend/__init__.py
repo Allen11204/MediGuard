@@ -1,6 +1,6 @@
 from flask import Flask
-from app.config import Config
-from app.extensions import db, bcrypt
+from backend.config import Config
+from backend.extensions import db, bcrypt
 
 def create_app():
     app = Flask(__name__)
@@ -11,16 +11,16 @@ def create_app():
 
     with app.app_context():
         # Import all models to register them with SQLAlchemy
-        from app.models.user import User
-        from app.models.patient import Patient
-        from app.models.doctor import Doctor
-        from app.models.condition import Condition
-        from app.models.medication import Medication
-        from app.models.observation import Observation
-        from app.models.audit_log import AuditLog
+        from backend.models.user import User
+        from backend.models.patient import Patient
+        from backend.models.doctor import Doctor
+        from backend.models.condition import Condition
+        from backend.models.medication import Medication
+        from backend.models.observation import Observation
+        from backend.models.audit_log import AuditLog
         db.create_all()
 
-        from app.routes import register_blueprints
+        from backend.routes import register_blueprints
         register_blueprints(app)
 
     @app.route("/")

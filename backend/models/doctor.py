@@ -3,7 +3,7 @@ Doctor model - Business entity for doctor role
 Linked to User table via user_id (1-to-1 relationship)
 """
 
-from app.extensions import db
+from backend.extensions import db
 from datetime import datetime
 
 class Doctor(db.Model):

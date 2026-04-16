@@ -3,7 +3,7 @@ Patient model - Core table for testing NER (Named Entity Recognition) and RBAC
 Contains deliberately sensitive PII fields for security feature demonstration
 """
 
-from app.extensions import db
+from backend.extensions import db
 from datetime import datetime
 
 class Patient(db.Model):
