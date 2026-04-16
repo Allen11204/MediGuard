@@ -1,8 +1,11 @@
-import os
-import json
-import glob
+"""
+Fake data seeding script for MediGuard
+Creates realistic test data with doctor-patient relationships
+"""
+
 import random
-from datetime import datetime
+from datetime import datetime, timedelta
+from faker import Faker
 from app import create_app
 from app.extensions import db, bcrypt
 from app.models.user import User
@@ -11,238 +14,240 @@ from app.models.condition import Condition
 from app.models.medication import Medication
 from app.models.observation import Observation
 
-def parse_date(date_str):
-    if not date_str:
-        return None
-    # FHIR dates can be "YYYY-MM-DD" or "YYYY-MM-DDThh:mm:ss+zz:zz"
-    try:
-        return datetime.strptime(date_str[:10], '%Y-%m-%d').date()
-    except ValueError:
-        return None
+fake = Faker()
 
-def seed_fhir_data():
+# Common password for all users
+PASSWORD = "111111"
+
+# Medical data templates
+CONDITIONS = [
+    {"name": "Hypertension", "system": "Cardiovascular", "severity": ["Mild", "Moderate"]},
+    {"name": "Type 2 Diabetes", "system": "Endocrine", "severity": ["Moderate", "Severe"]},
+    {"name": "Asthma", "system": "Respiratory", "severity": ["Mild", "Moderate", "Severe"]},
+    {"name": "Depression", "system": "Nervous", "severity": ["Mild", "Moderate"]},
+    {"name": "Arthritis", "system": "Musculoskeletal", "severity": ["Mild", "Moderate", "Severe"]},
+    {"name": "COPD", "system": "Respiratory", "severity": ["Moderate", "Severe", "Critical"]},
+    {"name": "Coronary Artery Disease", "system": "Cardiovascular", "severity": ["Moderate", "Severe"]},
+    {"name": "Anxiety Disorder", "system": "Nervous", "severity": ["Mild", "Moderate"]},
+    {"name": "Chronic Back Pain", "system": "Musculoskeletal", "severity": ["Mild", "Moderate", "Severe"]},
+    {"name": "Migraine", "system": "Nervous", "severity": ["Mild", "Moderate", "Severe"]},
+]
+
+MEDICATIONS = [
+    {"name": "Lisinopril 10mg", "purpose": "Blood pressure control"},
+    {"name": "Metformin 500mg", "purpose": "Diabetes management"},
+    {"name": "Albuterol Inhaler", "purpose": "Asthma symptom relief"},
+    {"name": "Sertraline 50mg", "purpose": "Depression treatment"},
+    {"name": "Ibuprofen 400mg", "purpose": "Pain relief"},
+    {"name": "Atorvastatin 20mg", "purpose": "Cholesterol management"},
+    {"name": "Omeprazole 20mg", "purpose": "Acid reflux control"},
+    {"name": "Gabapentin 300mg", "purpose": "Nerve pain management"},
+    {"name": "Amlodipine 5mg", "purpose": "Blood pressure control"},
+    {"name": "Metoprolol 25mg", "purpose": "Heart rate control"},
+]
+
+OBSERVATIONS = [
+    {"name": "Blood Pressure", "unit": "mmHg", "normal_range": (110, 130, 70, 85)},  # systolic/diastolic
+    {"name": "Heart Rate", "unit": "bpm", "normal_range": (60, 100)},
+    {"name": "Body Temperature", "unit": "°F", "normal_range": (97.0, 99.0)},
+    {"name": "Blood Glucose", "unit": "mg/dL", "normal_range": (70, 140)},
+    {"name": "Oxygen Saturation", "unit": "%", "normal_range": (95, 100)},
+    {"name": "Body Weight", "unit": "kg", "normal_range": (50, 100)},
+    {"name": "Body Height", "unit": "cm", "normal_range": (150, 190)},
+    {"name": "BMI", "unit": "kg/m²", "normal_range": (18.5, 25)},
+    {"name": "Respiratory Rate", "unit": "breaths/min", "normal_range": (12, 20)},
+    {"name": "Cholesterol Total", "unit": "mg/dL", "normal_range": (125, 200)},
+]
+
+def create_fake_data():
     app = create_app()
     with app.app_context():
-        # Clear existing data for a clean seed
-        print("Clearing existing data and recreating tables...")
+        print("🗑️  Clearing existing data...")
         db.drop_all()
         db.create_all()
 
-        # 1. Create Base Users (Admin & Doctor)
-        print("Creating admin and doctor users...")
+        # Hash password once for reuse
+        pwd_hash = bcrypt.generate_password_hash(PASSWORD).decode('utf-8')
+
+        # 1. Create Admin
+        print("\n👤 Creating admin account...")
         admin = User(
-            username="admin", 
-            email="admin@example.com",
-            password_hash=bcrypt.generate_password_hash("admin123").decode('utf-8'),
+            username="admin",
+            email="admin@mediguard.com",
+            password_hash=pwd_hash,
             role="Admin"
         )
-        doctor = User(
-            username="doctor", 
-            email="doctor@example.com",
-            password_hash=bcrypt.generate_password_hash("doctor123").decode('utf-8'),
-            role="Doctor"
-        )
-        db.session.add_all([admin, doctor])
+        db.session.add(admin)
+
+        # 2. Create 6 Doctors
+        print("\n👨‍⚕️ Creating doctor accounts...")
+        doctors = []
+        doctor_names = [
+            ("Dr. Robert", "Smith", "Cardiology"),
+            ("Dr. Emily", "Johnson", "Internal Medicine"),
+            ("Dr. Michael", "Chen", "Family Medicine"),
+            ("Dr. Sarah", "Williams", "Pulmonology"),
+            ("Dr. David", "Brown", "Endocrinology"),
+            ("Dr. Lisa", "Davis", "General Practice"),
+        ]
+
+        for first, last, specialty in doctor_names:
+            username = f"{first.lower().replace('dr. ', '')}_{last.lower()}"
+            doctor = User(
+                username=username,
+                email=f"{username}@mediguard.com",
+                password_hash=pwd_hash,
+                role="Doctor"
+            )
+            db.session.add(doctor)
+            doctors.append({
+                "user": doctor,
+                "name": f"{first} {last}",
+                "specialty": specialty
+            })
+            print(f"  ✓ {first} {last} ({specialty})")
+
+        db.session.flush()  # Get IDs for doctors
+
+        # 3. Create Patients (4-6 per doctor)
+        print("\n👥 Creating patient accounts...")
+        patient_counter = 0
+
+        for doc_info in doctors:
+            doctor = doc_info["user"]
+            num_patients = random.randint(4, 6)
+
+            print(f"\n  {doc_info['name']} will have {num_patients} patients:")
+
+            for _ in range(num_patients):
+                # Create patient user
+                first_name = fake.first_name()
+                last_name = fake.last_name()
+                username = f"{first_name.lower()}_{last_name.lower()}"
+
+                patient_user = User(
+                    username=username,
+                    email=f"{username}@example.com",
+                    password_hash=pwd_hash,
+                    role="Patient"
+                )
+                db.session.add(patient_user)
+                db.session.flush()
+
+                # Create patient record
+                dob = fake.date_of_birth(minimum_age=18, maximum_age=85)
+                patient = Patient(
+                    user_id=patient_user.id,
+                    doctor_id=doctor.id,  # Assign to this doctor
+                    mrn=f"MRN{patient_counter:06d}",
+                    name=f"{first_name} {last_name}",
+                    dob=dob,
+                    gender=random.choice(["Male", "Female"]),
+                    ssn=fake.ssn(),
+                    address=fake.address().replace('\n', ', '),
+                    phone=fake.phone_number(),
+                    email=patient_user.email
+                )
+                db.session.add(patient)
+                db.session.flush()
+
+                print(f"    ✓ {patient.name} (Age: {datetime.now().year - dob.year})")
+
+                # Add 1-3 conditions per patient
+                num_conditions = random.randint(1, 3)
+                selected_conditions = random.sample(CONDITIONS, num_conditions)
+                for cond_template in selected_conditions:
+                    condition = Condition(
+                        patient_id=patient.id,
+                        disease_name=cond_template["name"],
+                        severity=random.choice(cond_template["severity"]),
+                        status="active" if random.random() > 0.3 else "resolved",
+                        diagnosed_date=fake.date_between(start_date="-5y", end_date="today"),
+                        body_system=cond_template["system"]
+                    )
+                    db.session.add(condition)
+
+                # Add 2-5 medications per patient
+                num_meds = random.randint(2, 5)
+                selected_meds = random.sample(MEDICATIONS, num_meds)
+                for med_template in selected_meds:
+                    medication = Medication(
+                        patient_id=patient.id,
+                        medicine_name=med_template["name"],
+                        dosage="Take as directed",
+                        start_date=fake.date_between(start_date="-2y", end_date="today"),
+                        purpose=med_template["purpose"]
+                    )
+                    db.session.add(medication)
+
+                # Add 5-10 observations per patient
+                num_obs = random.randint(5, 10)
+                for _ in range(num_obs):
+                    obs_template = random.choice(OBSERVATIONS)
+
+                    # Generate realistic values
+                    if obs_template["name"] == "Blood Pressure":
+                        # Systolic/Diastolic
+                        sys_min, sys_max, dia_min, dia_max = obs_template["normal_range"]
+                        if random.random() > 0.8:  # 20% abnormal
+                            value = f"{random.randint(130, 160)}/{random.randint(85, 100)}"
+                            is_normal = False
+                        else:
+                            value = f"{random.randint(sys_min, sys_max)}/{random.randint(dia_min, dia_max)}"
+                            is_normal = True
+                    else:
+                        min_val, max_val = obs_template["normal_range"]
+                        if random.random() > 0.8:  # 20% abnormal
+                            # Generate slightly out of range
+                            if random.random() > 0.5:
+                                value = str(round(random.uniform(max_val, max_val * 1.2), 1))
+                            else:
+                                value = str(round(random.uniform(min_val * 0.8, min_val), 1))
+                            is_normal = False
+                        else:
+                            value = str(round(random.uniform(min_val, max_val), 1))
+                            is_normal = True
+
+                    observation = Observation(
+                        patient_id=patient.id,
+                        test_name=obs_template["name"],
+                        value=value,
+                        unit=obs_template["unit"],
+                        is_normal=is_normal,
+                        test_date=fake.date_between(start_date="-1y", end_date="today")
+                    )
+                    db.session.add(observation)
+
+                patient_counter += 1
+
+        # Commit all changes
         db.session.commit()
 
-        # 2. Iterate over FHIR files
-        fhir_dir = os.path.join(os.path.dirname(__file__), 'data', 'fhir')
-        files = glob.glob(os.path.join(fhir_dir, '*.json'))
-        
-        # limit to a few files for POC speed, say 10 (keeps the DB ultra-focused)
-        print(f"Found {len(files)} FHIR files. Seeding ALL records... (This might take a moment)")
-        
-        # Optimized Hash to vastly improve bulk ingestion speed
-        patient_pwd_hash = bcrypt.generate_password_hash("patient123").decode('utf-8')
-        
-        count = 0
-        for filepath in files:
-            # Skip hospital info or non-patient bundles
-            if 'hospitalInformation' in filepath:
-                continue
+        print("\n" + "="*60)
+        print("✅ Database seeding completed successfully!")
+        print("="*60)
+        print("\n📊 Summary:")
+        print(f"  • 1 Admin")
+        print(f"  • {len(doctors)} Doctors")
+        print(f"  • {patient_counter} Patients")
 
-            with open(filepath, 'r', encoding='utf-8') as f:
-                try:
-                    bundle = json.load(f)
-                except json.JSONDecodeError:
-                    continue
-            
-            if bundle.get('resourceType') != 'Bundle':
-                continue
-                
-            patient_resource = None
-            conditions_data = []
-            medications_data = []
-            observations_data = []
-            
-            for entry in bundle.get('entry', []):
-                resource = entry.get('resource', {})
-                rt = resource.get('resourceType')
-                
-                if rt == 'Patient':
-                    patient_resource = resource
-                elif rt == 'Condition':
-                    conditions_data.append(resource)
-                elif rt == 'MedicationRequest':
-                    medications_data.append(resource)
-                elif rt == 'Observation':
-                    observations_data.append(resource)
+        print("\n🔐 Login Credentials (Password for all: 111111):")
+        print("\n  Admin:")
+        print("    • Username: admin")
 
-            if not patient_resource:
-                continue
+        print("\n  Doctors:")
+        for doc_info in doctors:
+            print(f"    • Username: {doc_info['user'].username} ({doc_info['specialty']})")
 
-            # Extract Patient Info
-            mrn = patient_resource.get('id', 'UNKNOWN')
-            
-            # Name
-            name_list = patient_resource.get('name', [{}])[0]
-            given = " ".join(name_list.get('given', []))
-            family = name_list.get('family', '')
-            full_name = f"{given} {family}".strip()
-            
-            # DOB & Gender
-            dob_str = patient_resource.get('birthDate', '1970-01-01')
-            gender = patient_resource.get('gender', 'unknown')
-            
-            # Contact
-            telecom = patient_resource.get('telecom', [])
-            phone = next((t.get('value') for t in telecom if t.get('system') == 'phone'), '000-000-0000')
-            
-            # Address
-            address_list = patient_resource.get('address', [{}])
-            if address_list:
-                line = " ".join(address_list[0].get('line', []))
-                city = address_list[0].get('city', '')
-                state = address_list[0].get('state', '')
-                zipcode = address_list[0].get('postalCode', '')
-                full_address = f"{line}, {city}, {state} {zipcode}".strip()
-            else:
-                full_address = "Unknown Address"
-            
-            # SSN
-            identifiers = patient_resource.get('identifier', [])
-            ssn = next((i.get('value') for i in identifiers if i.get('system') == 'http://hl7.org/fhir/sid/us-ssn'), '000-00-0000')
+        print("\n  Patients:")
+        print("    • All patient usernames follow pattern: firstname_lastname")
+        print("    • Check the database for specific usernames")
 
-            # Create User for Patient
-            # Lowercase and clean username (e.g. jenice416_oconner)
-            clean_given = given.split(' ')[0].lower() if given else 'patient'
-            clean_family = family.replace("'", "").lower() if family else str(count)
-            username = f"{clean_given}_{clean_family}"
-            
-            patient_user = User(
-                username=username,
-                email=f"{username}@test.com",
-                password_hash=patient_pwd_hash, # Use optimized hash
-                role="Patient"
-            )
-            db.session.add(patient_user)
-            db.session.flush() # flush to get patient_user.id
-            
-            # Create Patient model
-            patient = Patient(
-                user_id=patient_user.id,
-                mrn=mrn,
-                name=full_name,
-                dob=parse_date(dob_str),
-                gender=gender,
-                ssn=ssn,
-                address=full_address,
-                phone=phone,
-                email=f"{username}@example.com"
-            )
-            db.session.add(patient)
-            db.session.flush()
-
-            # Create Conditions
-            for c in conditions_data:
-                code_text = c.get('code', {}).get('text')
-                if not code_text:
-                    coding = c.get('code', {}).get('coding', [])
-                    code_text = coding[0].get('display', 'Unknown') if coding else 'Unknown'
-                    
-                clin_status = c.get('clinicalStatus', {}).get('coding', [{}])[0].get('code', 'active')
-                onset = c.get('onsetDateTime', '2000-01-01')
-                
-                cond = Condition(
-                    patient_id=patient.id,
-                    disease_name=code_text[:100],
-                    severity=random.choice(["Mild", "Moderate", "Severe", "Critical", "Unknown"]), # Random assignment
-                    status=clin_status,
-                    diagnosed_date=parse_date(onset),
-                    body_system=random.choice(["Cardiovascular", "Respiratory", "Digestive", "Nervous", "Endocrine", "General Systemic", "Musculoskeletal", "Immune"]) # Random assignment
-                )
-                db.session.add(cond)
-                
-            # Create Medications
-            for m in medications_data:
-                med_name = m.get('medicationCodeableConcept', {}).get('text')
-                if not med_name:
-                    coding = m.get('medicationCodeableConcept', {}).get('coding', [])
-                    med_name = coding[0].get('display', 'Unknown') if coding else 'Unknown'
-                
-                start = m.get('authoredOn', '2000-01-01')
-                dosage = "As directed by physician"
-                if m.get('dosageInstruction'):
-                    dosage = m.get('dosageInstruction')[0].get('text', dosage)
-                    
-                purpose = random.choice(["Symptom management", "Pain relief", "Reduce inflammation", "Infection control", "Preventative care", "Lower blood pressure"])
-                reason = m.get('reasonCode', [])
-                if reason:
-                    purpose = reason[0].get('text', purpose)
-                
-                med = Medication(
-                    patient_id=patient.id,
-                    medicine_name=med_name[:200],
-                    dosage=dosage[:100],
-                    start_date=parse_date(start) or datetime.utcnow().date(),
-                    purpose=purpose[:200]
-                )
-                db.session.add(med)
-                
-            # Create Observations
-            for o in observations_data:
-                code_text = o.get('code', {}).get('text')
-                if not code_text:
-                    coding = o.get('code', {}).get('coding', [])
-                    code_text = coding[0].get('display', 'Unknown') if coding else 'Unknown'
-                
-                eff_date = o.get('effectiveDateTime', '2000-01-01')
-                
-                value = '0'
-                unit = ''
-                if 'valueQuantity' in o:
-                    value = str(o['valueQuantity'].get('value', '0'))
-                    unit = o['valueQuantity'].get('unit', '')
-                elif 'component' in o:
-                    # E.g. blood pressure parsing (diastolic/systolic)
-                    comps = []
-                    for comp in o['component']:
-                        cv = comp.get('valueQuantity', {}).get('value', '')
-                        comps.append(str(cv))
-                    value = "/".join(comps)
-                    unit = o['component'][0].get('valueQuantity', {}).get('unit', '') if o['component'] else ''
-                
-                obs = Observation(
-                    patient_id=patient.id,
-                    test_name=code_text[:100],
-                    value=value[:50],
-                    unit=unit[:20],
-                    is_normal=random.choice([True, True, True, True, False]), # Random (80% Normal, 20% Abnormal)
-                    test_date=parse_date(eff_date) or datetime.utcnow().date()
-                )
-                db.session.add(obs)
-                
-            count += 1
-            db.session.commit()
-            if count % 10 == 0:
-                print(f"Seeded {count} patients so far...")
-
-    print(f"\n✅ Database seeding successfully completed! Total seeded: {count}")
-    print("--------------------------------------------------")
-    print("Test Accounts Available:")
-    print("1. Admin  | User: admin   | Pass: admin123")
-    print("2. Doctor | User: doctor  | Pass: doctor123") 
-    print("3. Each seeded patient also has a login shown above.")
+        print("\n💡 Access Control:")
+        print("  • Admin can see all data")
+        print("  • Doctors can only see their assigned patients")
+        print("  • Patients can only see their own data")
+        print("="*60)
 
 if __name__ == "__main__":
-    seed_fhir_data()
+    create_fake_data()
