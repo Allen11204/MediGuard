@@ -4,7 +4,7 @@ Creates realistic test data with doctor-patient relationships
 """
 
 import random
-from datetime import datetime, timedelta
+from datetime import datetime
 from faker import Faker
 from backend import create_app
 from backend.extensions import db, bcrypt
