@@ -16,6 +16,7 @@ class Patient(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), unique=True)
+    doctor_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=True)  # Assigned doctor
 
     # Basic demographics
     name = db.Column(db.String(100), nullable=False)  # NER: should mask
@@ -32,6 +33,7 @@ class Patient(db.Model):
     mrn = db.Column(db.String(50), unique=True)  # Medical Record Number
 
     # Relationships
+    doctor = db.relationship('User', foreign_keys=[doctor_id], backref='patients')
     conditions = db.relationship('Condition', back_populates='patient', cascade='all, delete-orphan')
     medications = db.relationship('Medication', back_populates='patient', cascade='all, delete-orphan')
     observations = db.relationship('Observation', back_populates='patient', cascade='all, delete-orphan')
