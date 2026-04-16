@@ -2,9 +2,9 @@ import jwt
 from functools import wraps
 from datetime import datetime
 from flask import request, current_app
-from app.extensions import db
-from app.models.audit_log import AuditLog
-from app.models.patient import Patient
+from backend.extensions import db
+from backend.models.audit_log import AuditLog
+from backend.models.patient import Patient
 
 
 def jwt_required(f):

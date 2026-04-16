@@ -1,3 +1,4 @@
+# requirements for flask, python backend
 bcrypt==5.0.0
 blinker==1.9.0
 click==8.1.8

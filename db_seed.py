@@ -6,13 +6,13 @@ Creates realistic test data with doctor-patient relationships
 import random
 from datetime import datetime, timedelta
 from faker import Faker
-from app import create_app
-from app.extensions import db, bcrypt
-from app.models.user import User
-from app.models.patient import Patient
-from app.models.condition import Condition
-from app.models.medication import Medication
-from app.models.observation import Observation
+from backend import create_app
+from backend.extensions import db, bcrypt
+from backend.models.user import User
+from backend.models.patient import Patient
+from backend.models.condition import Condition
+from backend.models.medication import Medication
+from backend.models.observation import Observation
 
 fake = Faker()
 

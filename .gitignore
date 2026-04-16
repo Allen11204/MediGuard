@@ -1,6 +1,15 @@
-venv/
 .env
-__pycache__/
 *.pyc
 instance/
-data/
+
+# ===== Frontend =====
+frontend/node_modules/
+frontend/dist/
+
+# backend
+backend/__pycache__/
+
+# ===== System =====
+.DS_Store
+.vscode/
+.idea/
