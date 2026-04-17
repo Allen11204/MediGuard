@@ -60,7 +60,7 @@ Privacy-aware medical information system with LLM chatbot — RBAC, NER, DP, Aud
 
 https://synthetichealth.github.io/synthea/ # data source
 
-ui设计：统一简单的ui，不需要很复杂；布局可以思考一下
+PART1：
 1.登录api+界面
 2.医生的界面（管理的病人的数据+chatbot）+api
 --前端要求：自己病人的列表（展示medication，observation和condition）
@@ -72,8 +72,16 @@ ui设计：统一简单的ui，不需要很复杂；布局可以思考一下
 -- 后端要求：对user增删改查
 -- 前端要求：医生列表和病人列表，显示一些基本信息；audit log列表（用于记录fail的access，比如某个病人尝试绕过前端，通过直接访问api端点想要看别的病人的隐私数据）；
 
+PART2：
+1.使用ollama本地部署llm
+2.调用llm写一个chatbot
+3.写能够访问db的agent
+4.对llm写system prompt
+5.不能让llm越权调用db agent访问别的病人的数据
+
 tips：
-1. chatbot暂时前端不加，先完成基本功能（前后端）
+1. ui设计：统一简单的ui，不需要很复杂；布局可以思考一下
+2. chatbot暂时前端不加，先完成基本功能（前后端）
 
 demo角度：
 1.医生只能看自己病人的数据（patient_access_required进行后端权限校验）
