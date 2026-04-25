@@ -9,6 +9,7 @@ class AuditLog(db.Model):
     action        = db.Column(db.String(50), nullable=False)
     resource_type = db.Column(db.String(50), nullable=False)
     outcome       = db.Column(db.String(20), nullable=False)
+    source_ip     = db.Column(db.String(45))
     timestamp     = db.Column(db.DateTime, default=datetime.utcnow)
 
     def to_dict(self):
@@ -18,5 +19,6 @@ class AuditLog(db.Model):
             "action": self.action,
             "resource_type": self.resource_type,
             "outcome": self.outcome,
+            "source_ip": self.source_ip,
             "timestamp": self.timestamp.isoformat()
         }

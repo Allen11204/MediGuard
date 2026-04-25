@@ -29,6 +29,16 @@ def role_required(*allowed_roles):
         @wraps(f)
         def wrapper(*args, **kwargs):
             if request.current_user["role"] not in allowed_roles:
+                log = AuditLog(
+                    user_id=request.current_user["user_id"],
+                    action="ACCESS",
+                    resource_type=request.path,
+                    outcome="failure",
+                    source_ip=request.remote_addr,
+                    timestamp=datetime.utcnow()
+                )
+                db.session.add(log)
+                db.session.commit()
                 return {"error": "Permission denied"}, 403
             return f(*args, **kwargs)
         return wrapper
@@ -85,12 +95,32 @@ def patient_access_required(f):
         # Doctor can only access their assigned patients
         if user_role == "Doctor":
             if patient.doctor_id != user_id:
+                log = AuditLog(
+                    user_id=user_id,
+                    action="ACCESS",
+                    resource_type=request.path,
+                    outcome="failure",
+                    source_ip=request.remote_addr,
+                    timestamp=datetime.utcnow()
+                )
+                db.session.add(log)
+                db.session.commit()
                 return {"error": "Access denied - Not your patient"}, 403
             return f(*args, **kwargs)
 
         # Patient can only access their own record
         if user_role == "Patient":
             if patient.user_id != user_id:
+                log = AuditLog(
+                    user_id=user_id,
+                    action="ACCESS",
+                    resource_type=request.path,
+                    outcome="failure",
+                    source_ip=request.remote_addr,
+                    timestamp=datetime.utcnow()
+                )
+                db.session.add(log)
+                db.session.commit()
                 return {"error": "Access denied - Not your record"}, 403
             return f(*args, **kwargs)
 

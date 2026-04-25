@@ -1,25 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import ProtectedRoute from './components/ProtectedRoute'
+
+import Login from './pages/Login'
+import Register from './pages/Register'
+import DoctorPatients from './pages/DoctorPatients'
+import DoctorPatientDetail from './pages/DoctorPatientDetail'
+import PatientDashboard from './pages/PatientDashboard'
+import AdminUsers from './pages/AdminUsers'
+import AdminAuditLogs from './pages/AdminAuditLogs'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <BrowserRouter>
+            <Routes>
+                {/* Public routes */}
+                <Route path="/" element={<Navigate to="/login" />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+
+                {/* Doctor routes */}
+                <Route path="/doctor/patients" element={
+                    <ProtectedRoute allowedRoles={['Doctor']}>
+                        <DoctorPatients />
+                    </ProtectedRoute>
+                } />
+                <Route path="/doctor/patients/:id" element={
+                    <ProtectedRoute allowedRoles={['Doctor']}>
+                        <DoctorPatientDetail />
+                    </ProtectedRoute>
+                } />
+
+                {/* Patient routes */}
+                <Route path="/patient/dashboard" element={
+                    <ProtectedRoute allowedRoles={['Patient']}>
+                        <PatientDashboard />
+                    </ProtectedRoute>
+                } />
+
+                {/* Admin routes */}
+                <Route path="/admin/users" element={
+                    <ProtectedRoute allowedRoles={['Admin']}>
+                        <AdminUsers />
+                    </ProtectedRoute>
+                } />
+                <Route path="/admin/audit-logs" element={
+                    <ProtectedRoute allowedRoles={['Admin']}>
+                        <AdminAuditLogs />
+                    </ProtectedRoute>
+                } />
+            </Routes>
+        </BrowserRouter>
+    )
 }
 
-export default App;
+export default App
