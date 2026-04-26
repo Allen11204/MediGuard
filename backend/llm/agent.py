@@ -62,8 +62,8 @@ def run_agent(user_message: str, patient_id: int, current_user: dict, history: l
     # --- Step 2: RAG context ---
     rag_context = rag_search(clean_message)
 
-    # --- Step 3: Build system message (inject RAG context if available) ---
-    system_content = SYSTEM_PROMPT
+    # --- Step 3: Build system message (inject patient_id + RAG context) ---
+    system_content = SYSTEM_PROMPT + f"\n\nCurrent patient ID: {patient_id}. Always use this exact ID when calling tools."
     if rag_context:
         system_content += f"\n\nRelevant medical knowledge:\n{rag_context}"
 
