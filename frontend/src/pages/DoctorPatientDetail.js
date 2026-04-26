@@ -6,6 +6,7 @@ import {
     getMedications, addMedication,
     getObservations, addObservation
 } from '../services/doctorApi'
+import ChatBot from '../components/ChatBot'
 
 function DoctorPatientDetail() {
     const { id } = useParams()
@@ -161,6 +162,7 @@ function DoctorPatientDetail() {
                     </tbody>
                 </table>
             </section>
+        <ChatBot patientId={id} />
         </div>
     )
 }

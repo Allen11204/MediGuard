@@ -1,0 +1,111 @@
+ANNUAL PHYSICAL EXAMINATION GUIDELINES
+
+Purpose: A comprehensive health assessment performed annually to evaluate overall health status, screen for potential health issues, identify risk factors, and update preventive care measures.
+
+Components of an annual physical exam include:
+- Vital signs: blood pressure, heart rate, respiratory rate, temperature, oxygen saturation, height, weight, and BMI calculation.
+- Head, eyes, ears, nose, and throat (HEENT) examination.
+- Cardiovascular examination: heart sounds, peripheral pulses, and signs of vascular disease.
+- Respiratory examination: lung sounds and breathing patterns.
+- Abdominal examination: organ size, tenderness, masses, and bowel sounds.
+- Musculoskeletal examination: range of motion, joint stability, and muscle strength.
+- Neurological examination: reflexes, sensation, coordination, and mental status.
+- Skin examination: suspicious lesions, moles, and rashes.
+
+Standard laboratory tests ordered during annual physicals include complete blood count (CBC), comprehensive metabolic panel (CMP), lipid panel, thyroid function tests (TSH), urinalysis, and hemoglobin A1c or fasting glucose for diabetes screening.
+
+Age-specific screenings:
+- Adults 18-39: blood pressure screening every 3-5 years, cholesterol screening every 5 years, diabetes screening if risk factors present.
+- Adults 40-49: annual blood pressure screening, cholesterol screening every 5 years, diabetes screening every 3 years, colorectal cancer screening starting at age 45.
+- Adults 50-64: all of the above plus colonoscopy every 10 years, lung cancer screening for heavy smokers, bone density screening for women.
+- Adults 65 and older: all of the above plus annual flu shot, pneumococcal vaccination, shingles vaccination, fall risk assessment.
+
+
+BLOOD PRESSURE MEASUREMENT PROTOCOL
+
+Proper technique for accurate blood pressure measurement:
+1. Patient should rest for at least 5 minutes before measurement.
+2. Patient should be seated with back supported and feet flat on the floor.
+3. Arm should be supported at heart level.
+4. Use appropriate cuff size (cuff bladder should encircle at least 80% of the arm).
+5. Do not measure over clothing.
+6. Take at least two readings, 1-2 minutes apart, and average them.
+7. Record the arm used and the position of the patient.
+
+Blood pressure categories:
+- Normal: systolic less than 120 AND diastolic less than 80 mmHg.
+- Elevated: systolic 120-129 AND diastolic less than 80 mmHg.
+- Hypertension Stage 1: systolic 130-139 OR diastolic 80-89 mmHg.
+- Hypertension Stage 2: systolic 140 or higher OR diastolic 90 or higher mmHg.
+- Hypertensive Crisis: systolic higher than 180 AND/OR diastolic higher than 120 mmHg. Requires immediate medical attention.
+
+
+DIABETES MANAGEMENT GUIDELINES
+
+Blood glucose monitoring targets:
+- Fasting blood glucose: 80-130 mg/dL before meals.
+- Post-meal blood glucose: less than 180 mg/dL (1-2 hours after beginning of a meal).
+- HbA1c target: less than 7% for most adults (may be individualized).
+
+Hypoglycemia (low blood sugar) management:
+- Mild hypoglycemia (blood glucose 54-70 mg/dL): consume 15-20 grams of fast-acting carbohydrate (glucose tablets, juice, regular soda). Recheck blood glucose in 15 minutes. Repeat if still low.
+- Severe hypoglycemia (blood glucose below 54 mg/dL or unable to self-treat): administer glucagon injection or nasal glucagon. Call emergency services if unconscious.
+
+Diabetic foot care guidelines:
+- Inspect feet daily for cuts, blisters, redness, swelling, or nail problems.
+- Wash feet daily in lukewarm water and dry thoroughly, especially between toes.
+- Moisturize feet but not between toes.
+- Never walk barefoot, even indoors.
+- Wear properly fitting shoes and socks.
+- Trim toenails straight across and file edges.
+- Report any foot problems to healthcare provider immediately.
+- Annual comprehensive foot exam by healthcare provider.
+
+Sick day management for diabetes:
+- Continue taking diabetes medications unless instructed otherwise by provider.
+- Check blood glucose every 2-4 hours.
+- Stay hydrated with water or sugar-free fluids.
+- If unable to eat normally, consume small frequent meals or carbohydrate-containing fluids.
+- Contact healthcare provider if blood glucose stays above 240 mg/dL, if unable to keep food or fluids down for more than 4 hours, or if fever persists.
+
+
+COMMON LABORATORY TEST REFERENCE RANGES
+
+Complete Blood Count (CBC):
+- White blood cells (WBC): 4,500-11,000 cells per microliter
+- Red blood cells (RBC): Men 4.5-5.9 million/mcL, Women 4.1-5.1 million/mcL
+- Hemoglobin: Men 13.5-17.5 g/dL, Women 12.0-16.0 g/dL
+- Hematocrit: Men 38.3-48.6%, Women 35.5-44.9%
+- Platelets: 150,000-400,000 per microliter
+
+Comprehensive Metabolic Panel (CMP):
+- Glucose (fasting): 70-100 mg/dL
+- BUN (blood urea nitrogen): 7-20 mg/dL
+- Creatinine: 0.7-1.3 mg/dL
+- Sodium: 136-145 mEq/L
+- Potassium: 3.5-5.0 mEq/L
+- Chloride: 98-106 mEq/L
+- CO2 (bicarbonate): 23-29 mEq/L
+- Calcium: 8.5-10.5 mg/dL
+- Total protein: 6.0-8.3 g/dL
+- Albumin: 3.5-5.5 g/dL
+- Bilirubin (total): 0.1-1.2 mg/dL
+- Alkaline phosphatase (ALP): 44-147 IU/L
+- ALT (alanine transaminase): 7-56 IU/L
+- AST (aspartate transaminase): 10-40 IU/L
+
+Lipid Panel:
+- Total cholesterol: desirable less than 200 mg/dL
+- LDL cholesterol: optimal less than 100 mg/dL
+- HDL cholesterol: Men greater than 40 mg/dL, Women greater than 50 mg/dL
+- Triglycerides: normal less than 150 mg/dL
+
+Thyroid Function:
+- TSH (thyroid stimulating hormone): 0.4-4.0 mIU/L
+- Free T4: 0.8-1.8 ng/dL
+- Free T3: 2.3-4.2 pg/mL
+
+Hemoglobin A1c:
+- Normal: below 5.7%
+- Prediabetes: 5.7-6.4%
+- Diabetes: 6.5% or higher

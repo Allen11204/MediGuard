@@ -1,0 +1,112 @@
+METFORMIN
+
+Generic name: Metformin hydrochloride
+Brand names: Glucophage, Glucophage XR, Fortamet, Glumetza, Riomet
+Drug class: Biguanide
+
+Indications: First-line treatment for type 2 diabetes mellitus. Used to improve blood sugar control in adults and children aged 10 years and older. May also be used off-label for polycystic ovary syndrome (PCOS) and prediabetes.
+
+Mechanism of action: Decreases hepatic glucose production, decreases intestinal absorption of glucose, and improves insulin sensitivity by increasing peripheral glucose uptake and utilization.
+
+Common dosages: Starting dose is typically 500 mg twice daily or 850 mg once daily with meals. Maximum dose is 2550 mg per day in divided doses. Extended-release formulations are taken once daily.
+
+Side effects: Common side effects include nausea, vomiting, diarrhea, stomach pain, loss of appetite, and metallic taste. These often improve over time. Serious but rare side effect is lactic acidosis, which requires immediate medical attention.
+
+Contraindications: Severe renal impairment (eGFR below 30 mL/min), metabolic acidosis, diabetic ketoacidosis. Should be temporarily discontinued before iodinated contrast procedures. Use caution in patients with liver disease or excessive alcohol intake.
+
+Monitoring: Check HbA1c every 3-6 months, renal function at least annually, and vitamin B12 levels periodically as metformin can cause B12 deficiency.
+
+
+LISINOPRIL
+
+Generic name: Lisinopril
+Brand names: Prinivil, Zestril
+Drug class: ACE inhibitor (angiotensin-converting enzyme inhibitor)
+
+Indications: Treatment of hypertension, heart failure, and to improve survival after heart attack. Also used for diabetic nephropathy.
+
+Mechanism of action: Inhibits angiotensin-converting enzyme (ACE), preventing the conversion of angiotensin I to angiotensin II. This results in vasodilation, reduced aldosterone secretion, and decreased blood pressure.
+
+Common dosages: For hypertension, starting dose is 10 mg once daily. Usual maintenance dose is 20-40 mg once daily. Maximum dose is 80 mg per day.
+
+Side effects: Common side effects include dry cough, dizziness, headache, fatigue, and nausea. Serious side effects include angioedema (swelling of face, lips, tongue, throat), hyperkalemia (high potassium), and renal impairment.
+
+Contraindications: History of angioedema related to ACE inhibitor use, pregnancy (can cause fetal harm), bilateral renal artery stenosis. Should not be used with aliskiren in patients with diabetes.
+
+Monitoring: Blood pressure, serum potassium, and renal function (BUN, creatinine) should be monitored regularly, especially after dose changes.
+
+
+ALBUTEROL
+
+Generic name: Albuterol (salbutamol)
+Brand names: ProAir, Ventolin, Proventil
+Drug class: Short-acting beta-2 agonist (SABA)
+
+Indications: Treatment and prevention of bronchospasm in patients with reversible obstructive airway disease (asthma, COPD). Prevention of exercise-induced bronchospasm.
+
+Mechanism of action: Relaxes bronchial smooth muscle by stimulating beta-2 adrenergic receptors, leading to bronchodilation. Has rapid onset of action (within 5 minutes) with duration of 4-6 hours.
+
+Common dosages: Inhaler: 1-2 puffs every 4-6 hours as needed. Nebulizer solution: 2.5 mg three to four times daily as needed. For exercise-induced bronchospasm: 2 puffs 15-30 minutes before exercise.
+
+Side effects: Common side effects include tremor, nervousness, headache, rapid heartbeat, dizziness, and throat irritation. Overuse may lead to decreased effectiveness and increased risk of severe asthma attacks.
+
+Contraindications: No absolute contraindications for life-threatening bronchospasm. Use with caution in patients with cardiovascular disease, diabetes, hyperthyroidism, and seizure disorders.
+
+Important notes: If using more than 2 days per week (excluding exercise prevention), asthma may not be well controlled and long-term controller medication should be considered. Patients should rinse mouth after using inhaled corticosteroids but this is not necessary for albuterol.
+
+
+ATORVASTATIN
+
+Generic name: Atorvastatin calcium
+Brand names: Lipitor
+Drug class: HMG-CoA reductase inhibitor (statin)
+
+Indications: Treatment of hyperlipidemia and mixed dyslipidemia. Prevention of cardiovascular disease in patients at risk. Reduces risk of heart attack, stroke, and need for revascularization procedures.
+
+Mechanism of action: Inhibits HMG-CoA reductase, the rate-limiting enzyme in cholesterol biosynthesis in the liver. This leads to decreased LDL cholesterol, total cholesterol, and triglycerides, and a modest increase in HDL cholesterol.
+
+Common dosages: Starting dose is 10-20 mg once daily. Range is 10-80 mg once daily. Can be taken at any time of day with or without food.
+
+Side effects: Common side effects include muscle pain or weakness (myalgia), joint pain, diarrhea, nausea, and headache. Serious but rare side effects include rhabdomyolysis (severe muscle breakdown), liver damage, and increased blood sugar.
+
+Contraindications: Active liver disease, unexplained persistent elevations of serum transaminases, pregnancy, and breastfeeding.
+
+Monitoring: Lipid panel 4-12 weeks after initiation and periodically thereafter. Liver function tests at baseline and as clinically indicated. Report unexplained muscle pain, tenderness, or weakness promptly.
+
+
+SERTRALINE
+
+Generic name: Sertraline hydrochloride
+Brand names: Zoloft
+Drug class: Selective serotonin reuptake inhibitor (SSRI)
+
+Indications: Treatment of major depressive disorder, obsessive-compulsive disorder, panic disorder, post-traumatic stress disorder, social anxiety disorder, and premenstrual dysphoric disorder.
+
+Mechanism of action: Selectively inhibits the reuptake of serotonin in the central nervous system, increasing serotonin availability in the synaptic cleft. This enhances serotonergic neurotransmission.
+
+Common dosages: For depression, starting dose is 50 mg once daily. May increase by 25-50 mg increments at intervals of at least one week. Maximum dose is 200 mg per day.
+
+Side effects: Common side effects include nausea, diarrhea, insomnia, dizziness, dry mouth, fatigue, tremor, sexual dysfunction, and increased sweating. Most side effects are mild and may improve over time.
+
+Contraindications: Concurrent use with MAOIs or pimozide. Use within 14 days of stopping an MAOI. Concurrent use with disulfiram (oral concentrate contains alcohol).
+
+Warnings: May increase suicidal thinking and behavior in children, adolescents, and young adults. Monitor closely for clinical worsening during initial treatment. Serotonin syndrome risk when combined with other serotonergic drugs. Discontinuation should be gradual to avoid withdrawal symptoms.
+
+
+ASPIRIN
+
+Generic name: Acetylsalicylic acid (ASA)
+Brand names: Bayer Aspirin, Ecotrin, Bufferin
+Drug class: Nonsteroidal anti-inflammatory drug (NSAID), antiplatelet agent
+
+Indications: Relief of mild to moderate pain, fever reduction, anti-inflammatory treatment. Low-dose aspirin is used for prevention of cardiovascular events (heart attack, stroke) in high-risk patients.
+
+Mechanism of action: Irreversibly inhibits cyclooxygenase (COX-1 and COX-2) enzymes. This decreases production of prostaglandins (reducing pain and inflammation) and thromboxane A2 (reducing platelet aggregation).
+
+Common dosages: For pain and fever: 325-650 mg every 4-6 hours as needed, maximum 4000 mg per day. For cardiovascular prevention: 81 mg (low-dose) once daily.
+
+Side effects: Common side effects include stomach upset, heartburn, nausea, and easy bruising. Serious side effects include gastrointestinal bleeding, hemorrhagic stroke, allergic reactions, and Reye syndrome in children with viral infections.
+
+Contraindications: Known allergy to aspirin or NSAIDs, active peptic ulcer disease, bleeding disorders, children under 18 with viral infections (risk of Reye syndrome), third trimester of pregnancy.
+
+Interactions: Increased bleeding risk with anticoagulants (warfarin), other NSAIDs, and alcohol. May reduce effectiveness of ACE inhibitors and diuretics.

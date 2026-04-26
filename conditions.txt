@@ -1,0 +1,71 @@
+HYPERTENSION (HIGH BLOOD PRESSURE)
+
+Hypertension is a chronic medical condition in which the blood pressure in the arteries is persistently elevated. Blood pressure is expressed as systolic pressure over diastolic pressure. Normal blood pressure is below 120/80 mmHg. Hypertension is defined as blood pressure consistently at or above 130/80 mmHg.
+
+Risk factors include obesity, physical inactivity, excessive salt intake, excessive alcohol consumption, stress, older age, genetics, family history of hypertension, chronic kidney disease, and sleep apnea.
+
+Symptoms are often absent, which is why hypertension is called the "silent killer." When symptoms do occur, they may include headaches, shortness of breath, nosebleeds, flushing, dizziness, chest pain, and visual changes.
+
+Complications of uncontrolled hypertension include heart attack, stroke, heart failure, kidney disease or failure, vision loss, sexual dysfunction, and peripheral artery disease.
+
+Treatment includes lifestyle modifications such as reducing sodium intake to less than 2300 mg per day, regular physical activity of at least 150 minutes per week, maintaining a healthy weight, limiting alcohol consumption, and quitting smoking. Medications commonly prescribed include ACE inhibitors (lisinopril, enalapril), ARBs (losartan, valsartan), calcium channel blockers (amlodipine), thiazide diuretics (hydrochlorothiazide), and beta-blockers (metoprolol).
+
+Monitoring involves regular blood pressure checks. Target blood pressure for most adults is below 130/80 mmHg. Patients should monitor blood pressure at home and keep a log for their healthcare provider.
+
+
+TYPE 2 DIABETES MELLITUS
+
+Type 2 diabetes is a chronic metabolic disorder characterized by high blood sugar levels due to insulin resistance and relative insulin deficiency. The body either does not produce enough insulin or the cells do not respond properly to insulin.
+
+Risk factors include being overweight or obese, physical inactivity, family history of diabetes, age over 45, history of gestational diabetes, polycystic ovary syndrome, and certain ethnicities including African American, Hispanic, Native American, and Asian American.
+
+Symptoms include increased thirst, frequent urination, increased hunger, unintended weight loss, fatigue, blurred vision, slow-healing sores, frequent infections, numbness or tingling in hands or feet, and areas of darkened skin.
+
+Diagnosis is based on fasting plasma glucose of 126 mg/dL or higher, HbA1c of 6.5% or higher, or oral glucose tolerance test result of 200 mg/dL or higher.
+
+Complications include cardiovascular disease, neuropathy (nerve damage), nephropathy (kidney damage), retinopathy (eye damage), foot damage that may require amputation, skin conditions, hearing impairment, and Alzheimer's disease.
+
+First-line medication is metformin, which reduces glucose production in the liver and improves insulin sensitivity. Other medications include sulfonylureas (glipizide, glyburide), DPP-4 inhibitors (sitagliptin), GLP-1 receptor agonists (liraglutide, semaglutide), SGLT2 inhibitors (empagliflozin, dapagliflozin), and insulin therapy when oral medications are insufficient.
+
+Management includes blood glucose monitoring, HbA1c testing every 3-6 months (target below 7%), regular eye exams, foot exams, kidney function tests, and cholesterol monitoring.
+
+
+ASTHMA
+
+Asthma is a chronic inflammatory disease of the airways characterized by variable and recurring symptoms, reversible airflow obstruction, and bronchospasm. The airways become swollen, narrow, and produce extra mucus, making breathing difficult.
+
+Triggers include allergens (dust mites, pollen, pet dander, mold), respiratory infections, physical exercise, cold air, air pollutants and irritants (smoke, chemical fumes), certain medications (beta-blockers, aspirin), strong emotions and stress, sulfites in food, and gastroesophageal reflux disease (GERD).
+
+Symptoms include wheezing, shortness of breath, chest tightness, coughing (especially at night or early morning), difficulty sleeping due to breathing problems, and whistling or wheezing sound when exhaling.
+
+Classification by severity: intermittent (symptoms 2 days or less per week), mild persistent (symptoms more than 2 days per week), moderate persistent (daily symptoms), and severe persistent (symptoms throughout the day).
+
+Quick-relief medications include short-acting beta-agonists (albuterol, levalbuterol) for acute symptoms. Long-term control medications include inhaled corticosteroids (fluticasone, budesonide), long-acting beta-agonists (salmeterol, formoterol), leukotriene modifiers (montelukast), and combination inhalers.
+
+Patients should have an asthma action plan, avoid known triggers, get annual flu vaccinations, and monitor peak flow readings regularly.
+
+
+CORONARY ARTERY DISEASE
+
+Coronary artery disease (CAD) is caused by plaque buildup in the walls of the coronary arteries that supply blood to the heart. Plaque is made up of cholesterol, fatty substances, cellular waste products, calcium, and fibrin.
+
+Risk factors include high blood pressure, high cholesterol, diabetes, smoking, obesity, physical inactivity, unhealthy diet, family history of heart disease, age (men over 45, women over 55), and chronic stress.
+
+Symptoms may include chest pain or discomfort (angina), shortness of breath, pain in the neck, jaw, throat, upper abdomen, or back, and fatigue. Women may experience atypical symptoms such as nausea, vomiting, and back or jaw pain.
+
+Diagnosis involves electrocardiogram (ECG), echocardiogram, stress test, cardiac catheterization and angiogram, CT coronary angiography, and blood tests for cholesterol and cardiac biomarkers.
+
+Treatment includes lifestyle changes (heart-healthy diet, regular exercise, smoking cessation, weight management), medications (statins, aspirin, beta-blockers, ACE inhibitors, nitroglycerin), and procedures (angioplasty with stenting or coronary artery bypass grafting).
+
+
+MAJOR DEPRESSIVE DISORDER
+
+Major depressive disorder (MDD) is a mental health condition characterized by persistently depressed mood or loss of interest in activities, causing significant impairment in daily life. A major depressive episode lasts at least two weeks.
+
+Risk factors include family history of depression, personal history of mental health disorders, major life changes or trauma, certain medications, chronic illness, and substance abuse.
+
+Symptoms include persistent sad or empty mood, loss of interest in previously enjoyed activities, significant weight change, sleep disturbances (insomnia or hypersomnia), fatigue or loss of energy, feelings of worthlessness or excessive guilt, difficulty concentrating or making decisions, and recurrent thoughts of death or suicide.
+
+Diagnosis requires at least five symptoms present during the same two-week period, representing a change from previous functioning. At least one symptom must be depressed mood or loss of interest.
+
+Treatment includes psychotherapy (cognitive behavioral therapy, interpersonal therapy), antidepressant medications (SSRIs such as sertraline, fluoxetine, escitalopram; SNRIs such as venlafaxine, duloxetine; atypical antidepressants such as bupropion), and in severe cases, electroconvulsive therapy (ECT).

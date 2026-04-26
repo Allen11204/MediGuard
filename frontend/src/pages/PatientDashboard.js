@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getMyProfile, getMyConditions, getMyMedications, getMyObservations } from '../services/patientApi'
+import ChatBot from '../components/ChatBot'
 
 function PatientDashboard() {
     const [profile, setProfile] = useState(null)
@@ -100,6 +101,7 @@ function PatientDashboard() {
                     </tbody>
                 </table>
             </section>
+            <ChatBot patientId={null} />
         </div>
     )
 }
