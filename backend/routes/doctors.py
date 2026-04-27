@@ -14,8 +14,6 @@ def _parse_date(s):
 doctors_bp = Blueprint("doctors", __name__, url_prefix="/api")
 
 
-# ── 患者基本信息 ──────────────────────────────────────────
-
 @doctors_bp.route("/patients", methods=["GET"])
 @jwt_required
 @role_required("Doctor")
