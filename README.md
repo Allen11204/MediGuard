@@ -138,5 +138,12 @@ MediGuard/
 
 ---
 
+## Agent Design Reflection
+
+1. **The model is too small** — `llama3.2` (3B) has weak instruction-following, which limits how much prompt engineering and agent harness design can compensate. A larger model would likely respond better to the same prompts.
+2. **Larger models may need better prompts** — switching to a more capable model is not a silver bullet; the system prompt and tool-calling format would need to be revisited and tuned accordingly.
+
+---
+
 ## Data Source
 https://synthetichealth.github.io/synthea/
