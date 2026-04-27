@@ -79,38 +79,6 @@ MediGuard/
 
 ---
 
-## Progress
-
-### Part 1 — Authentication, Authorization & Infrastructure ✅
-
-| Feature | Status | Notes |
-|---------|--------|-------|
-| JWT authentication | ✅ Done | PyJWT, 24h expiry |
-| Password encryption | ✅ Done | bcrypt via Flask-Bcrypt |
-| RBAC — backend | ✅ Done | `role_required` + `patient_access_required` decorators |
-| RBAC — frontend | ✅ Done | `ProtectedRoute` with `allowedRoles` |
-| Audit logging | ✅ Done | Logs failed access attempts to `audit_logs` table |
-| Backend API | ✅ Done | Auth / Doctor / Patient / Admin endpoints |
-| Frontend UI | ✅ Done | Login, Register, Doctor dashboard, Patient dashboard, Admin panel |
-| Database seed | ✅ Done | 1 admin, 6 doctors, 30 patients with conditions/medications/observations |
-
-### Part 2 — LLM & Privacy Protection
-
-| Feature | Status | Notes |
-|---------|--------|-------|
-| Local LLM (Ollama) | ✅ Done | llama3.2 via `ollama_client.py` |
-| RAG knowledge base | ✅ Done | 15 chunks (4 guidelines + 6 medications + 5 conditions), ChromaDB + sentence-transformers |
-| RAG auto-ingest | ✅ Done | Server ingests on startup if ChromaDB is empty |
-| LLM Agent | ✅ Done | Tool-calling loop: RAG → LLM → DB tool → LLM → reply |
-| DB query tools | ✅ Done | get_profile / get_conditions / get_medications / get_observations |
-| RBAC in tools | ✅ Done | Each tool re-checks access; violations logged to AuditLog |
-| System prompt | ✅ Done | Role-restricted, tool-format enforced |
-| Input/output filter (NER) | ✅ Done | PHI detection on input, de-identification on output |
-| Differential Privacy (DP) | ⬜ Todo | — |
-| Frontend chatbot UI | ⬜ Todo | Backend `/api/llm/chat` ready; UI not yet added |
-
----
-
 ## API Reference
 
 ### Auth
