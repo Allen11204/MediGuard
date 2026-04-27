@@ -71,7 +71,7 @@ MediGuard/
 │   ├── src/pages/       # Login, Register, DoctorPatients, DoctorPatientDetail, PatientDashboard, AdminUsers, AdminAuditLogs
 │   ├── src/components/  # ProtectedRoute (RBAC guard), ChatBot
 │   └── src/services/    # API clients (authApi, doctorApi, patientApi, adminApi, llmApi)
-└── knowledge_base/                    # RAG knowledge — chunked & embedded into ChromaDB on first startup
+└── knowledge_base/      # RAG knowledge — chunked & embedded into ChromaDB on first startup
     ├── clinical_guidelines.txt        
     ├── medications.txt               
     └── conditions.txt               
