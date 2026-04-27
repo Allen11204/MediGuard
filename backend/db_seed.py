@@ -9,6 +9,7 @@ from faker import Faker
 from backend import create_app
 from backend.extensions import db, bcrypt
 from backend.models.user import User
+from backend.models.doctor import Doctor
 from backend.models.patient import Patient
 from backend.models.condition import Condition
 from backend.models.medication import Medication
@@ -93,15 +94,27 @@ def create_fake_data():
 
         for first, last, specialty in doctor_names:
             username = f"{first.lower().replace('dr. ', '')}_{last.lower()}"
-            doctor = User(
+            doctor_user = User(
                 username=username,
                 email=f"{username}@mediguard.com",
                 password_hash=pwd_hash,
                 role="Doctor"
             )
-            db.session.add(doctor)
+            db.session.add(doctor_user)
+            db.session.flush()
+
+            doctor_profile = Doctor(
+                user_id=doctor_user.id,
+                name=f"{first} {last}",
+                specialization=specialty,
+                department=specialty,
+                license_number=f"LIC{fake.unique.random_number(digits=6, fix_len=True)}",
+                office_phone=fake.phone_number()[:20],
+                office_location=fake.address().replace('\n', ', ')[:200]
+            )
+            db.session.add(doctor_profile)
             doctors.append({
-                "user": doctor,
+                "user": doctor_user,
                 "name": f"{first} {last}",
                 "specialty": specialty
             })
