@@ -58,7 +58,7 @@ function ChatBot({ patientId }) {
                             maxWidth: '85%',
                             padding: '12px 16px',
                             borderRadius: msg.role === 'user' ? '12px 12px 0 12px' : '12px 12px 12px 0',
-                            background: msg.role === 'user' ? 'var(--primary-color)' : '#fff',
+                            background: msg.role === 'user' ? 'var(--primary)' : '#fff',
                             color: msg.role === 'user' ? '#fff' : 'inherit',
                             boxShadow: '0 2px 5px rgba(0,0,0,0.05)',
                             whiteSpace: 'pre-wrap',
@@ -90,8 +90,8 @@ function ChatBot({ patientId }) {
 
             <div style={{ padding: '15px', borderTop: '1px solid var(--border-color)', background: '#fff', display: 'flex', gap: '10px' }}>
                 <input
-                    className="form-input"
-                    style={{ flex: 1, margin: 0 }}
+                    type="text"
+                    style={{ flex: 1, padding: '10px', fontSize: '15px', color: '#000', backgroundColor: '#fff', border: '1px solid #ccc', borderRadius: '4px' }}
                     value={input}
                     onChange={e => setInput(e.target.value)}
                     onKeyDown={handleKeyDown}

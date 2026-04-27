@@ -9,7 +9,7 @@ def create_app():
 
     db.init_app(app)
     bcrypt.init_app(app)
-    CORS(app, origins=["http://localhost:3000"])
+    CORS(app, origins=["http://localhost:3000", "http://localhost:3001", "http://localhost:3002"])
 
     with app.app_context():
         # Import all models to register them with SQLAlchemy

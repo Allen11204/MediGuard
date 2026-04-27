@@ -8,6 +8,8 @@ import DoctorPatientDetail from './pages/DoctorPatientDetail'
 import PatientDashboard from './pages/PatientDashboard'
 import AdminUsers from './pages/AdminUsers'
 import AdminAuditLogs from './pages/AdminAuditLogs'
+import NotFound from './pages/NotFound'
+import Unauthorized from './pages/Unauthorized'
 
 function App() {
     return (
@@ -48,6 +50,10 @@ function App() {
                         <AdminAuditLogs />
                     </ProtectedRoute>
                 } />
+
+                {/* Error routing */}
+                <Route path="/unauthorized" element={<Unauthorized />} />
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </BrowserRouter>
     )
