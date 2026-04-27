@@ -69,11 +69,12 @@ MediGuard/
 │       └── ner.py             # Input filter + output de-identification
 ├── frontend/
 │   ├── src/pages/       # Login, Register, DoctorPatients, DoctorPatientDetail, PatientDashboard, AdminUsers, AdminAuditLogs
-│   ├── src/components/  # ProtectedRoute (RBAC guard)
-│   └── src/services/    # API clients (authApi, doctorApi, patientApi, adminApi)
-├── clinical_guidelines.txt   # RAG knowledge: exam guidelines, BP protocol, diabetes mgmt, lab ranges
-├── medications.txt            # RAG knowledge: Metformin, Lisinopril, Albuterol, Atorvastatin, Sertraline, Aspirin
-└── conditions.txt             # RAG knowledge: Hypertension, T2DM, Asthma, CAD, MDD
+│   ├── src/components/  # ProtectedRoute (RBAC guard), ChatBot
+│   └── src/services/    # API clients (authApi, doctorApi, patientApi, adminApi, llmApi)
+└── knowledge_base/                    # RAG knowledge — chunked & embedded into ChromaDB on first startup
+    ├── clinical_guidelines.txt        
+    ├── medications.txt               
+    └── conditions.txt               
 ```
 
 ---
@@ -160,7 +161,7 @@ MediGuard/
 
 ## Security Design
 
-- **Two-layer access control**: JWT (authentication) + role/patient checks (authorization)
+- **RBAC**: frontend + backend
 - **Doctor scope**: `patient_access_required` ensures doctors only access their assigned patients
 - **LLM RBAC**: Each DB tool independently verifies access — the LLM cannot bypass permission checks
 - **Audit trail**: All unauthorized access attempts (HTTP and LLM tool calls) are logged with user ID, resource, and IP

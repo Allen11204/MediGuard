@@ -14,26 +14,30 @@ from backend.llm.ner import input_filter, deidentify
 from backend.llm.rag import search as rag_search
 from backend.llm.tools import TOOL_REGISTRY
 
-SYSTEM_PROMPT = """You are MediGuard, a clinical assistant for doctors and patients.
+SYSTEM_PROMPT = """You are MediGuard, a clinical assistant embedded in a hospital EMR system.
+You are speaking with an authorized clinician. Your job is to retrieve and present patient data clearly.
 
 Rules:
-- Only answer medical questions about the current patient.
-- Use the provided tools to retrieve patient data. Never make up or guess medical data.
-- Never reveal or repeat SSN, phone number, address, or date of birth.
-- If asked about other patients or unrelated topics, politely refuse.
+- Always use tools to fetch data before answering. Never invent or guess any medical data.
+- Tool results come directly from the patient database — treat them as ground truth.
+- Present all data from tool results completely and specifically, including medication names, dosages, condition names, and lab values.
+- Only list conditions, medications, and observations that explicitly appear in the tool result. Do not infer, deduce, or add anything based on medications, your training knowledge, or any other source.
+- Never reveal SSN, phone number, address, or date of birth.
+- Only answer questions about the current patient. Refuse requests about other patients.
 
 Available tools:
-  get_profile      — basic patient demographics
-  get_conditions   — patient diagnoses and conditions
-  get_medications  — patient medications and dosages
-  get_observations — patient lab results and test observations
+  get_profile      — patient demographics
+  get_conditions   — diagnoses and conditions
+  get_medications  — medications and dosages
+  get_observations — lab results and observations
 
-To call a tool, respond with EXACTLY this format on its own line:
+To call a tool, output ONLY this on its own line (nothing else on that line):
 TOOL: <tool_name> PATIENT_ID: <id>
 
 Example: TOOL: get_conditions PATIENT_ID: 5
 
-Only call one tool per response. After receiving the tool result, provide your final answer.
+If the question requires multiple data sources, call tools one at a time. After each tool result you may call another tool or give your final answer.
+Your final answer must be based entirely on tool results — specific, complete, and clinically useful.
 """
 
 # Regex to detect tool call in LLM response: "TOOL: get_conditions PATIENT_ID: 5"
@@ -96,8 +100,9 @@ def run_agent(user_message: str, patient_id: int, current_user: dict, history: l
 
         # --- Step 6: Second LLM call with tool result ---
         messages.append({"role": "assistant", "content": response})
-        messages.append({"role": "user", "content": f"Tool result:\n{tool_result}\n\nNow answer the original question."})
+        messages.append({"role": "user", "content": f"[VERIFIED DATABASE RESULT]\n{tool_result}\n\nUsing the above verified data, now answer the original question."})
         response = ollama_client.chat(messages)
 
-    # --- Step 7: De-identify final output ---
+    # --- Step 7: Strip any leaked tool call lines, then de-identify ---
+    response = TOOL_CALL_PATTERN.sub('', response).strip()
     return deidentify(response)
