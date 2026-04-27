@@ -8,7 +8,7 @@ Privacy-aware medical information system with LLM chatbot — RBAC, NER, RAG, Au
 ### Prerequisites
 - Python 3.9+
 - Node.js 18+
-- [Ollama](https://ollama.com) with `llama3.2` pulled (`ollama pull llama3.2`)
+- An LLM backend (see [LLM Configuration](#llm-configuration) below)
 
 ### Backend
 ```bash
@@ -20,7 +20,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # 3. Configure environment (copy and edit)
-cp .env.example .env   # set SECRET_KEY and DATABASE_URL
+cp .env.example .env   # set SECRET_KEY, DATABASE_URL, and LLM settings
 
 # 4. Seed the database (creates all tables + 1 admin, 6 doctors, 30 patients)
 PYTHONPATH=. python backend/db_seed.py
@@ -32,6 +32,41 @@ PYTHONPATH=. python backend_run.py
 
 > **Note:** ChromaDB and SQLite are stored in `instance/` (gitignored).  
 > The server automatically ingests `clinical_guidelines.txt`, `medications.txt`, `conditions.txt` into ChromaDB on first startup.
+
+---
+
+## LLM Configuration
+
+The chatbot uses a unified client that speaks the OpenAI-compatible `/chat/completions` API, so it works with any compatible backend — local or cloud — without extra dependencies.
+
+Configure via environment variables in `.env`:
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `LLM_BASE_URL` | `http://localhost:11434/v1` | Base URL of the API endpoint |
+| `LLM_API_KEY` | `ollama` | API key (`ollama` is ignored by local Ollama) |
+| `LLM_MODEL` | `llama3.2` | Model name |
+
+**Local Ollama (default)**
+```bash
+# Pull a model first
+ollama pull llama3.2
+
+# .env
+LLM_BASE_URL=http://localhost:11434/v1
+LLM_API_KEY=ollama
+LLM_MODEL=llama3.2
+```
+
+**OpenAI**
+```bash
+# .env
+LLM_BASE_URL=https://api.openai.com/v1
+LLM_API_KEY=sk-...
+LLM_MODEL=gpt-4o
+```
+
+**Other OpenAI-compatible services** (Together, Groq, LM Studio, vLLM, …): set `LLM_BASE_URL` and `LLM_API_KEY` to the provider's values.
 
 ### Frontend
 ```bash
@@ -61,7 +96,7 @@ MediGuard/
 │   ├── routes/          # Flask blueprints (auth, doctors, patients, admin, llm)
 │   ├── decorators.py    # jwt_required, role_required, patient_access_required + audit logging
 │   └── llm/
-│       ├── ollama_client.py   # Ollama HTTP client (llama3.2)
+│       ├── llm_client.py      # Unified LLM client — OpenAI-compatible API (local or cloud)
 │       ├── rag.py             # ChromaDB persistent store + semantic search
 │       ├── ingest.py          # Chunk & embed medical knowledge files → ChromaDB
 │       ├── agent.py           # LLM agent: RAG → LLM → tool call → LLM → de-identify
@@ -142,6 +177,7 @@ MediGuard/
 
 1. **The model is too small** — `llama3.2` (3B) has weak instruction-following, which limits how much prompt engineering and agent harness design can compensate. A larger model would likely respond better to the same prompts.
 2. **Larger models may need better prompts** — switching to a more capable model is not a silver bullet; the system prompt and tool-calling format would need to be revisited and tuned accordingly.
+3. **LLM backend is swappable** — the unified client speaks the OpenAI-compatible API, so any model (local or cloud) can be dropped in by changing three environment variables.
 
 ---
 
