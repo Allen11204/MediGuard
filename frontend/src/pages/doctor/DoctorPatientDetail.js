@@ -62,11 +62,11 @@ export default function DoctorPatientDetail() {
         setObservationForm({ test_name: '', value: '', unit: '', is_normal: true, test_date: '' })
     }
 
-    if (!patient) return <Layout title="Patient Detail" hasChat><div className="page-body"><p className="text-muted">Loading...</p></div>    
+    if (!patient) return <Layout title="Patient Detail" hasChat patientId={id}><div className="page-body"><p className="text-muted">Loading...</p></div>
         </Layout>
 
     return (
-        <Layout title={patient.name} breadcrumb={`My Patients / ${patient.name}`} hasChat>
+        <Layout title={patient.name} breadcrumb={`My Patients / ${patient.name}`} hasChat patientId={id}>
             <div className="page-body">
                 <button className="btn btn-ghost btn-sm mb-5" onClick={() => navigate('/doctor/patients')}>← Back to Patients</button>
 
