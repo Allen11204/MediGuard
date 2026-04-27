@@ -1,4 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom'
+import ChatBot from '../chat/ChatBot'
 
 const NAV_ITEMS = {
     Doctor: [
@@ -19,7 +20,7 @@ const ROLE_BADGE = {
     Admin:   'badge-purple',
 }
 
-function Layout({ children, title, breadcrumb, hasChat = false }) {
+function Layout({ children, title, breadcrumb, hasChat = false, patientId = null }) {
     const navigate  = useNavigate()
     const location  = useLocation()
     const role      = localStorage.getItem('role') || ''
@@ -76,9 +77,12 @@ function Layout({ children, title, breadcrumb, hasChat = false }) {
             </header>
 
             {/* Main */}
-            <main className={`main-content${hasChat ? ' has-chat' : ''}`}>
+            <main className={`main-content${hasChat && role === 'Doctor' ? ' has-chat' : ''}`}>
                 {children}
             </main>
+
+            {/* Global ChatBot Handler (Only for Doctors) */}
+            {hasChat && role === 'Doctor' && <ChatBot patientId={patientId} />}
         </div>
     )
 }

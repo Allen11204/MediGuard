@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from 'react'
 import { sendMessage } from '../../services/llmApi'
 
-function ChatBot({ patientId }) {
+export default function ChatBot({ patientId }) {
     const [messages, setMessages] = useState([
-        { role: 'assistant', content: 'Hello! I am MediGuard assistant. How can I help you?' }
+        { role: 'assistant', content: 'Hello! I am MediGuard AI assistant. I securely query patient records and knowledge bases. How can I help?' }
     ])
     const [input, setInput] = useState('')
     const [loading, setLoading] = useState(false)
@@ -28,7 +28,7 @@ function ChatBot({ patientId }) {
             const res = await sendMessage(patientId, text, history)
             setMessages([...updatedMessages, { role: 'assistant', content: res.data.reply }])
         } catch (err) {
-            setMessages([...updatedMessages, { role: 'assistant', content: 'Sorry, something went wrong. Please try again.' }])
+            setMessages([...updatedMessages, { role: 'assistant', content: '⚠️ Sorry, an error occurred while connecting to AI.' }])
         } finally {
             setLoading(false)
         }
@@ -42,75 +42,51 @@ function ChatBot({ patientId }) {
     }
 
     return (
-        <div className="card" style={{ flex: 1, display: 'flex', flexDirection: 'column', height: '600px', margin: 0, overflow: 'hidden' }}>
-            <div className="card-header">
-                <span className="card-title">🤖 AI Assistant</span>
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Ask about {patientId ? 'this patient' : 'your health'}</div>
+        <aside className="chat-panel">
+            <div className="chat-header">
+                <h3>🤖 Clinical Assistant</h3>
+                <div className="chat-dot"></div>
             </div>
 
-            <div className="card-body" style={{ flex: 1, overflowY: 'auto', padding: '15px', background: 'var(--bg-app)', display: 'flex', flexDirection: 'column', gap: '15px' }}>
+            <div className="chat-messages">
                 {messages.map((msg, idx) => (
-                    <div key={idx} style={{
-                        display: 'flex',
-                        justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start',
-                    }}>
-                        <div style={{
-                            maxWidth: '85%',
-                            padding: '12px 16px',
-                            borderRadius: msg.role === 'user' ? '12px 12px 0 12px' : '12px 12px 12px 0',
-                            background: msg.role === 'user' ? 'var(--primary)' : '#fff',
-                            color: msg.role === 'user' ? '#fff' : 'inherit',
-                            boxShadow: '0 2px 5px rgba(0,0,0,0.05)',
-                            whiteSpace: 'pre-wrap',
-                            lineHeight: 1.5
-                        }}>
-                            {msg.content}
-                        </div>
+                    <div key={idx} className={`chat-bubble chat-bubble-${msg.role}`}>
+                        {msg.content}
                     </div>
                 ))}
                 {loading && (
-                    <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                        <div style={{
-                            padding: '12px 16px',
-                            borderRadius: '12px 12px 12px 0',
-                            background: '#fff',
-                            boxShadow: '0 2px 5px rgba(0,0,0,0.05)',
-                            color: 'var(--text-muted)'
-                        }}>
-                            <div className="typing-indicator" style={{ display: 'flex', gap: '4px' }}>
-                                <span style={{ animation: 'blink 1.4s infinite .2s' }}>•</span>
-                                <span style={{ animation: 'blink 1.4s infinite .4s' }}>•</span>
-                                <span style={{ animation: 'blink 1.4s infinite .6s' }}>•</span>
-                            </div>
-                        </div>
+                    <div className="chat-bubble chat-bubble-assistant chat-thinking" style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
+                        <span style={{ animation: 'blink 1.4s infinite .2s' }}>•</span>
+                        <span style={{ animation: 'blink 1.4s infinite .4s' }}>•</span>
+                        <span style={{ animation: 'blink 1.4s infinite .6s' }}>•</span>
                     </div>
                 )}
                 <div ref={bottomRef} />
             </div>
 
-            <div style={{ padding: '15px', borderTop: '1px solid var(--border-color)', background: '#fff', display: 'flex', gap: '10px' }}>
-                <input
-                    type="text"
-                    style={{ flex: 1, padding: '10px', fontSize: '15px', color: '#000', backgroundColor: '#fff', border: '1px solid #ccc', borderRadius: '4px' }}
-                    value={input}
-                    onChange={e => setInput(e.target.value)}
+            <div className="chat-input-area" style={{ padding: '12px', borderTop: '1px solid var(--border)', background: '#fff', display: 'flex', gap: '8px' }}>
+                <input 
+                    type="text" 
+                    className="form-input" 
+                    style={{ flex: 1, margin: 0 }}
+                    value={input} 
+                    onChange={e => setInput(e.target.value)} 
                     onKeyDown={handleKeyDown}
-                    placeholder={`Message AI Assistant...`}
-                    disabled={loading}
+                    placeholder="Ask about records..." 
+                    disabled={loading} 
                 />
-                <button className="btn btn-primary" onClick={handleSend} disabled={loading || !input.trim()} style={{ whiteSpace: 'nowrap' }}>
+                <button 
+                    className="btn btn-primary btn-sm" 
+                    onClick={handleSend} 
+                    disabled={loading || !input.trim()}
+                >
                     Send ➔
                 </button>
             </div>
+            
             <style>{`
-                @keyframes blink {
-                    0% { opacity: .2; }
-                    20% { opacity: 1; }
-                    100% { opacity: .2; }
-                }
+                @keyframes blink { 0% { opacity: .2; } 20% { opacity: 1; } 100% { opacity: .2; } }
             `}</style>
-        </div>
+        </aside>
     )
 }
-
-export default ChatBot

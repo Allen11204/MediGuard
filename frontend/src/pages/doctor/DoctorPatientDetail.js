@@ -4,7 +4,7 @@ import {
     getPatient, getConditions, addCondition, getMedications, addMedication, getObservations, addObservation
 } from '../../services/doctorApi'
 import Layout from '../../components/common/Layout'
-import ChatBot from '../../components/chat/ChatBot'
+
 import Modal from '../../components/common/Modal'
 import PatientHeader from '../../components/patient/PatientHeader'
 import ConditionsList from '../../components/patient/ConditionsList'
@@ -62,7 +62,7 @@ export default function DoctorPatientDetail() {
         setObservationForm({ test_name: '', value: '', unit: '', is_normal: true, test_date: '' })
     }
 
-    if (!patient) return <Layout title="Patient Detail" hasChat><div className="page-body"><p className="text-muted">Loading...</p></div>    <ChatBot />
+    if (!patient) return <Layout title="Patient Detail" hasChat><div className="page-body"><p className="text-muted">Loading...</p></div>    
         </Layout>
 
     return (

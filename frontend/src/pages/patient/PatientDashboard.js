@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { getMyProfile, getMyConditions, getMyMedications, getMyObservations } from '../../services/patientApi'
 import Layout from '../../components/common/Layout'
-import ChatBot from '../../components/chat/ChatBot'
+
 import PatientHeader from '../../components/patient/PatientHeader'
 import ConditionsList from '../../components/patient/ConditionsList'
 import MedicationsList from '../../components/patient/MedicationsList'
@@ -23,7 +23,7 @@ export default function PatientDashboard() {
     if (!profile) return (
         <Layout title="My Dashboard" hasChat>
             <div className="page-body"><p className="text-muted">Loading...</p></div>
-            <ChatBot />
+            
         </Layout>
     )
 
