@@ -9,7 +9,7 @@ LLM Agent — orchestrates the full conversation flow:
 """
 
 import re
-from backend.llm import ollama_client
+from backend.llm import llm_client
 from backend.llm.ner import input_filter, deidentify
 from backend.llm.rag import search as rag_search
 from backend.llm.tools import TOOL_REGISTRY
@@ -75,7 +75,7 @@ def run_agent(user_message: str, patient_id: int, current_user: dict, history: l
 
     # --- Step 4: First LLM call ---
     messages = [system_message] + history + [{"role": "user", "content": clean_message}]
-    response = ollama_client.chat(messages)
+    response = llm_client.chat(messages)
 
     # --- Step 5: Check if LLM wants to call a tool ---
     match = TOOL_CALL_PATTERN.search(response)
@@ -101,7 +101,7 @@ def run_agent(user_message: str, patient_id: int, current_user: dict, history: l
         # --- Step 6: Second LLM call with tool result ---
         messages.append({"role": "assistant", "content": response})
         messages.append({"role": "user", "content": f"[VERIFIED DATABASE RESULT]\n{tool_result}\n\nUsing the above verified data, now answer the original question."})
-        response = ollama_client.chat(messages)
+        response = llm_client.chat(messages)
 
     # --- Step 7: Strip any leaked tool call lines, then de-identify ---
     response = TOOL_CALL_PATTERN.sub('', response).strip()
