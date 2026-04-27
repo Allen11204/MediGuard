@@ -1,15 +1,15 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import ProtectedRoute from './components/ProtectedRoute'
 
-import Login from './pages/Login'
-import Register from './pages/Register'
-import DoctorPatients from './pages/DoctorPatients'
-import DoctorPatientDetail from './pages/DoctorPatientDetail'
-import PatientDashboard from './pages/PatientDashboard'
-import AdminUsers from './pages/AdminUsers'
-import AdminAuditLogs from './pages/AdminAuditLogs'
-import NotFound from './pages/NotFound'
-import Unauthorized from './pages/Unauthorized'
+import Login from './pages/auth/Login'
+import Register from './pages/auth/Register'
+import DoctorPatients from './pages/doctor/DoctorPatients'
+import DoctorPatientDetail from './pages/doctor/DoctorPatientDetail'
+import PatientDashboard from './pages/patient/PatientDashboard'
+import AdminUsers from './pages/admin/AdminUsers'
+import AdminAuditLogs from './pages/admin/AdminAuditLogs'
+import NotFound from './pages/errors/NotFound'
+import Unauthorized from './pages/errors/Unauthorized'
 
 function App() {
     return (

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getAuditLogs } from '../services/adminApi'
-import Layout from '../components/Layout'
+import { getAuditLogs } from '../../services/adminApi'
+import Layout from '../../components/common/Layout'
 
 function AdminAuditLogs() {
     const [logs, setLogs] = useState([])

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getMyPatients } from '../services/doctorApi'
-import Layout from '../components/Layout'
+import { getMyPatients } from '../../services/doctorApi'
+import Layout from '../../components/common/Layout'
 
 function DoctorPatients() {
     const [patients, setPatients] = useState([])

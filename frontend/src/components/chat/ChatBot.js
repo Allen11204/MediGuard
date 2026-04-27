@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { sendMessage } from '../services/llmApi'
+import { sendMessage } from '../../services/llmApi'
 
 function ChatBot({ patientId }) {
     const [messages, setMessages] = useState([

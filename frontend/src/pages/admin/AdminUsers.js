@@ -1,27 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getUsers, createUser, deleteUser } from '../services/adminApi'
-import Layout from '../components/Layout'
+import { getUsers, createUser, deleteUser } from '../../services/adminApi'
+import Layout from '../../components/common/Layout'
+import Modal from '../../components/common/Modal'
 
-function Modal({ title, onClose, onSubmit, children }) {
-    return (
-        <div className="modal-overlay" onClick={onClose}>
-            <div className="modal" onClick={e => e.stopPropagation()}>
-                <div className="modal-header">
-                    <span className="modal-title">{title}</span>
-                    <button className="btn btn-ghost btn-sm" onClick={onClose}>✕</button>
-                </div>
-                <form onSubmit={onSubmit}>
-                    {children}
-                    <div className="modal-footer">
-                        <button type="button" className="btn btn-ghost" onClick={onClose}>Cancel</button>
-                        <button type="submit" className="btn btn-primary">Save</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    )
-}
 
 function AdminUsers() {
     const [users, setUsers] = useState([])
