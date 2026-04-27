@@ -11,7 +11,7 @@ import os
 import re
 from backend.llm.rag import add_document, get_count
 
-DOCS_DIR = os.path.join(os.path.dirname(__file__), "../../")
+DOCS_DIR = os.path.join(os.path.dirname(__file__), "../../knowledge_base")
 
 SOURCE_FILES = [
     ("clinical_guidelines.txt", "Clinical Guidelines"),
