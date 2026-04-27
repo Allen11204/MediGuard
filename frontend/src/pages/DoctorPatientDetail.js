@@ -48,11 +48,23 @@ function DoctorPatientDetail() {
     const [observationForm, setObservationForm] = useState({ test_name: '', value: '', unit: '', is_normal: true, test_date: '' })
 
     useEffect(() => {
-        getPatient(id).then(res => setPatient(res.data))
-        getConditions(id).then(res => setConditions(res.data))
-        getMedications(id).then(res => setMedications(res.data))
-        getObservations(id).then(res => setObservations(res.data))
-    }, [id])
+        getPatient(id)
+            .then(res => {
+                setPatient(res.data)
+                getConditions(id).then(res => setConditions(res.data))
+                getMedications(id).then(res => setMedications(res.data))
+                getObservations(id).then(res => setObservations(res.data))
+            })
+            .catch(err => {
+                if (err.response?.status === 404) {
+                    navigate('/not-found')
+                } else if (err.response?.status === 403) {
+                    navigate('/unauthorized')
+                } else {
+                    navigate('/not-found')
+                }
+            })
+    }, [id, navigate])
 
     const handleAddCondition = async (e) => {
         e.preventDefault()
