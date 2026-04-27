@@ -9,16 +9,14 @@ function ChatBot({ patientId }) {
     const [loading, setLoading] = useState(false)
     const bottomRef = useRef(null)
 
-    // Auto-scroll to bottom when new messages arrive
     useEffect(() => {
         bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
-    }, [messages])
+    }, [messages, loading])
 
     const handleSend = async () => {
         const text = input.trim()
         if (!text || loading) return
 
-        // Add user message to chat
         const userMessage = { role: 'user', content: text }
         const updatedMessages = [...messages, userMessage]
         setMessages(updatedMessages)
@@ -26,7 +24,6 @@ function ChatBot({ patientId }) {
         setLoading(true)
 
         try {
-            // history = all messages before the one we just added (excludes the initial greeting)
             const history = updatedMessages.slice(1, -1)
             const res = await sendMessage(patientId, text, history)
             setMessages([...updatedMessages, { role: 'assistant', content: res.data.reply }])
@@ -45,53 +42,73 @@ function ChatBot({ patientId }) {
     }
 
     return (
-        <div style={{ border: '1px solid #ccc', borderRadius: '8px', padding: '16px', marginTop: '24px' }}>
-            <h3 style={{ marginTop: 0 }}>MediGuard Assistant</h3>
+        <div className="card" style={{ flex: 1, display: 'flex', flexDirection: 'column', height: '600px', margin: 0, overflow: 'hidden' }}>
+            <div className="card-header">
+                <span className="card-title">🤖 AI Assistant</span>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Ask about {patientId ? 'this patient' : 'your health'}</div>
+            </div>
 
-            {/* Message list */}
-            <div style={{ height: '300px', overflowY: 'auto', marginBottom: '12px', padding: '8px', background: '#f9f9f9', borderRadius: '4px' }}>
+            <div className="card-body" style={{ flex: 1, overflowY: 'auto', padding: '15px', background: 'var(--bg-app)', display: 'flex', flexDirection: 'column', gap: '15px' }}>
                 {messages.map((msg, idx) => (
                     <div key={idx} style={{
                         display: 'flex',
                         justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start',
-                        marginBottom: '8px'
                     }}>
                         <div style={{
-                            maxWidth: '70%',
-                            padding: '8px 12px',
-                            borderRadius: '12px',
-                            background: msg.role === 'user' ? '#0070f3' : '#e0e0e0',
-                            color: msg.role === 'user' ? '#fff' : '#000',
-                            whiteSpace: 'pre-wrap'
+                            maxWidth: '85%',
+                            padding: '12px 16px',
+                            borderRadius: msg.role === 'user' ? '12px 12px 0 12px' : '12px 12px 12px 0',
+                            background: msg.role === 'user' ? 'var(--primary-color)' : '#fff',
+                            color: msg.role === 'user' ? '#fff' : 'inherit',
+                            boxShadow: '0 2px 5px rgba(0,0,0,0.05)',
+                            whiteSpace: 'pre-wrap',
+                            lineHeight: 1.5
                         }}>
                             {msg.content}
                         </div>
                     </div>
                 ))}
                 {loading && (
-                    <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '8px' }}>
-                        <div style={{ padding: '8px 12px', borderRadius: '12px', background: '#e0e0e0', color: '#666' }}>
-                            Thinking...
+                    <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                        <div style={{
+                            padding: '12px 16px',
+                            borderRadius: '12px 12px 12px 0',
+                            background: '#fff',
+                            boxShadow: '0 2px 5px rgba(0,0,0,0.05)',
+                            color: 'var(--text-muted)'
+                        }}>
+                            <div className="typing-indicator" style={{ display: 'flex', gap: '4px' }}>
+                                <span style={{ animation: 'blink 1.4s infinite .2s' }}>•</span>
+                                <span style={{ animation: 'blink 1.4s infinite .4s' }}>•</span>
+                                <span style={{ animation: 'blink 1.4s infinite .6s' }}>•</span>
+                            </div>
                         </div>
                     </div>
                 )}
                 <div ref={bottomRef} />
             </div>
 
-            {/* Input area */}
-            <div style={{ display: 'flex', gap: '8px' }}>
+            <div style={{ padding: '15px', borderTop: '1px solid var(--border-color)', background: '#fff', display: 'flex', gap: '10px' }}>
                 <input
-                    style={{ flex: 1, padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
+                    className="form-input"
+                    style={{ flex: 1, margin: 0 }}
                     value={input}
                     onChange={e => setInput(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    placeholder="Ask about this patient..."
+                    placeholder={`Message AI Assistant...`}
                     disabled={loading}
                 />
-                <button onClick={handleSend} disabled={loading || !input.trim()}>
-                    Send
+                <button className="btn btn-primary" onClick={handleSend} disabled={loading || !input.trim()} style={{ whiteSpace: 'nowrap' }}>
+                    Send ➔
                 </button>
             </div>
+            <style>{`
+                @keyframes blink {
+                    0% { opacity: .2; }
+                    20% { opacity: 1; }
+                    100% { opacity: .2; }
+                }
+            `}</style>
         </div>
     )
 }
