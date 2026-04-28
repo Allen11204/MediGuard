@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 from backend.models.user import User
 from backend.models.audit_log import AuditLog
 from backend.extensions import db, bcrypt
-from backend.decorators import jwt_required, role_required
+from backend.auth import jwt_required, role_required
 
 admin_bp = Blueprint("admin", __name__, url_prefix="/api/admin")
 

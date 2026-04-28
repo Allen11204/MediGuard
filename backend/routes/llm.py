@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from backend.decorators import jwt_required, role_required
+from backend.auth import jwt_required, role_required
 from backend.models.patient import Patient
 from backend.llm.agent import run_agent
 

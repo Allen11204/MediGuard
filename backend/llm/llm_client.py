@@ -12,6 +12,7 @@ LLM_MODEL      Model name           (default: llama3.2)
 
 import os
 import requests
+from backend.utils.log import log
 
 
 def chat(messages: list[dict]) -> str:
@@ -19,6 +20,8 @@ def chat(messages: list[dict]) -> str:
     base_url = os.getenv("LLM_BASE_URL", "http://localhost:11434/v1")
     api_key = os.getenv("LLM_API_KEY", "ollama")
     model = os.getenv("LLM_MODEL", "llama3.2")
+
+    log("LLM", f"calling {base_url} model={model} messages={len(messages)}")
 
     resp = requests.post(
         f"{base_url.rstrip('/')}/chat/completions",

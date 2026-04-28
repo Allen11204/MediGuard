@@ -1,6 +1,7 @@
 import os
 import chromadb
 from sentence_transformers import SentenceTransformer
+from backend.utils.log import log
 
 # Persist ChromaDB to disk so embeddings survive server restarts
 _CHROMA_PATH = os.path.join(os.path.dirname(__file__), "../../instance/chroma")
@@ -43,6 +44,8 @@ def search(query: str, n_results: int = 3) -> str:
 
     passages = results.get("documents", [[]])[0]
     metadatas = results.get("metadatas", [[]])[0]
+
+    log("RAG", f"query={query!r} retrieved={len(passages)} chunks")
 
     parts = []
     for doc, meta in zip(passages, metadatas):

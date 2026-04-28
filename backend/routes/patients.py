@@ -3,7 +3,7 @@ from backend.models.patient import Patient
 from backend.models.condition import Condition
 from backend.models.medication import Medication
 from backend.models.observation import Observation
-from backend.decorators import jwt_required, role_required
+from backend.auth import jwt_required, role_required
 
 patients_bp = Blueprint("patients", __name__, url_prefix="/api/my")
 

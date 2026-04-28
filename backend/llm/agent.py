@@ -13,6 +13,7 @@ from backend.llm import llm_client
 from backend.llm.ner import input_filter, deidentify
 from backend.llm.rag import search as rag_search
 from backend.llm.tools import TOOL_REGISTRY
+from backend.utils.log import log
 
 SYSTEM_PROMPT = """You are MediGuard, a clinical assistant embedded in a hospital EMR system.
 You are speaking with an authorized clinician. Your job is to retrieve and present patient data clearly.
@@ -58,6 +59,9 @@ def run_agent(user_message: str, patient_id: int, current_user: dict, history: l
         The assistant's final reply string (de-identified).
     """
 
+    print(f"\n{'='*60}")
+    log("AGENT", f"user={current_user['username']} patient_id={patient_id} message={user_message!r}")
+
     # --- Step 1: Input filter ---
     clean_message, err = input_filter(user_message)
     if err:
@@ -84,6 +88,7 @@ def run_agent(user_message: str, patient_id: int, current_user: dict, history: l
         requested_patient_id = int(match.group(2))
 
         # Execute the tool (RBAC enforced inside)
+        log("TOOL", f"calling {tool_name} patient_id={requested_patient_id}")
         tool_func = TOOL_REGISTRY.get(tool_name)
         if tool_func is None:
             tool_result = f"Unknown tool: {tool_name}"
@@ -105,4 +110,6 @@ def run_agent(user_message: str, patient_id: int, current_user: dict, history: l
 
     # --- Step 7: Strip any leaked tool call lines, then de-identify ---
     response = TOOL_CALL_PATTERN.sub('', response).strip()
+    log("AGENT", "done")
+    print(f"{'='*60}\n")
     return deidentify(response)
