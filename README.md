@@ -180,6 +180,36 @@ MediGuard/
   - *Output de-identification*: tool results are scrubbed before being fed back to the LLM, and the final LLM response is scrubbed again before being returned to the client — so PHI cannot leak through the database or the model's own output
 - **RAG grounding**: LLM answers are grounded in verified medical knowledge, reducing hallucination
 
+```mermaid
+flowchart TD
+    U([Clinician]) --> A[JWT Auth]
+    A -->|invalid token| R1[401 Unauthorized]
+    A -->|valid| B[Route RBAC\nrole_required / patient_access_required]
+    B -->|wrong role or not your patient| AL1[Audit Log] --> R2[403 Forbidden]
+    B -->|allowed| C[PHI Input Filter\nSSN / phone / email regex]
+    C -->|PHI detected| R3[Block — warn user\nno LLM call]
+    C -->|clean| D[LLM Round 1]
+    D --> E{Tool call\nin response?}
+    E -->|yes| F[Tool-level RBAC\n_check_access]
+    F -->|denied| AL2[Audit Log] --> R4[Access denied]
+    F -->|allowed| G[(Patient DB)]
+    G --> H[De-identify\ntool result]
+    H --> I[LLM Round 2]
+    I --> J[De-identify\nfinal output]
+    E -->|no| J
+    J --> K([Response to client])
+
+    style R1 fill:#f66,color:#fff
+    style R2 fill:#f66,color:#fff
+    style R3 fill:#f66,color:#fff
+    style R4 fill:#f66,color:#fff
+    style AL1 fill:#f90,color:#fff
+    style AL2 fill:#f90,color:#fff
+    style C fill:#6af,color:#fff
+    style H fill:#6af,color:#fff
+    style J fill:#6af,color:#fff
+```
+
 ---
 
 ## Use Case Scenario: Multi-Turn Clinical Consultation
